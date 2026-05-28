@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boula Web Design | فخامة التصميم الرقمي</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-card: #12122c;
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --blue: #00c6ff;
+            --blue-glow: rgba(0, 198, 255, 0.4);
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+            --gradient-hero: linear-gradient(135deg, #0a0a1a 0%, #150f2e 50%, #0a0a1a 100%);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--gold), var(--blue));
+            border-radius: 4px;
+        }
+
+        /* Utilities / Animations Base */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            visibility: hidden;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--gold));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 80px 20px;
+        }
+
+        /* Animated Grid Overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(214, 175, 87, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+
+        .hero-badge span {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            background: linear-gradient(90deg, var(--gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(-1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseText 3s ease-in-out infinite alternate;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .hero-subtitle span {
+            color: var(--blue);
+            font-weight: bold;
+        }
+
+        /* Premium Pulsing Button */
+        .btn-premium {
+            display: inline-block;
+            padding: 16px 45px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--bg-dark);
+            background: linear-gradient(90deg, var(--gold), #ffdf7a);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 35px rgba(214, 175, 87, 0.7);
+        }
+
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50px;
+            background: inherit;
+            z-index: -1;
+            animation: pulseGlow 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.25); opacity: 0; }
+        }
+
+        /* --- Pricing Section --- */
+        .pricing-section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        /* Make custom card centered at bottom on desktop if needed, or part of grid */
+        .pricing-card.custom-plan {
+            grid-column: span 2;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s, box-shadow 0.4s;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--blue);
+            box-shadow: 0 15px 35px var(--blue-glow);
+        }
+
+        /* Gold Card Specific Style for featured ones */
+        .pricing-card.featured {
+            border-color: rgba(214, 175, 87, 0.3);
+        }
+        .pricing-card.featured:hover {
+            border-color: var(--gold);
+            box-shadow: 0 15px 35px var(--gold-glow);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .card-badge.gold-badge {
+            background: linear-gradient(90deg, var(--gold), #b8860b);
+        }
+
+        .card-badge.blue-badge {
+            background: linear-gradient(90deg, var(--blue), #0080ff);
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .card-price-box {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .old-price {
+            color: #ff4d4d;
+            text-decoration: line-through;
+            font-size: 1.2rem;
+        }
+
+        .new-price {
+            color: var(--gold);
+            font-size: 2.3rem;
+            font-weight: 900;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .btn-card-order {
+            display: block;
+            text-align: center;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--blue);
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover .btn-card-order {
+            background: linear-gradient(90deg, var(--blue), #0080ff);
+            border-color: transparent;
+            box-shadow: 0 5px 15px var(--blue-glow);
+            animation: pulseBtn 1.5s infinite;
+        }
+
+        .pricing-card.featured:hover .btn-card-order {
+            background: linear-gradient(90deg, var(--gold), #ffdf7a);
+            color: var(--bg-dark);
+            box-shadow: 0 5px 15px var(--gold-glow);
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- Reviews Section --- */
+        .reviews-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f26 50%, var(--bg-dark) 100%);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            background: var(--bg-card);
+            border-color: rgba(214, 175, 87, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .review-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .reviewer-info h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- Footer Section --- */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 20px;
+            text-align: center;
+            background: #060612;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+            color: #fff;
+        }
+
+        .social-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* Specific Glow effects for Socials */
+        .social-icon.instagram:hover {
+            color: #e1306c;
+            background: rgba(225, 48, 108, 0.1);
+            border-color: #e1306c;
+            box-shadow: 0 0 20px rgba(225, 48, 108, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .social-icon.tiktok:hover {
+            color: #00f2fe;
+            background: rgba(0, 242, 254, 0.1);
+            border-color: #00f2fe;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive Breakpoints --- */
+        @media (max-width: 1024px) {
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .hero-badge {
+                top: 20px;
+                right: 20px;
+                padding: 8px 15px;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .pricing-card.custom-plan {
+                grid-column: span 1;
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon></svg>
+            <span>Boula Studio</span>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">نصمم مواقعك بإتقان واحتراف</h1>
+            <p class="hero-subtitle"><span>Boula Web Design</span> — اجعل حضورك الرقمي يتألق بأحدث المعايير العالمية</p>
+            <a href="https://wa.me/201558247219" target="_blank" class="btn-premium">احجز موقعك الآن</a>
+        </div>
+    </header>
+
+    <section class="pricing-section container fade-in-section">
+        <div class="section-header">
+            <h2>أسعارنا الحصرية</h2>
+            <p>عروض محدودة الوقت — احجز الآن قبل انتهاء الخصم</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div>
+                    <h3 class="card-title">موقع خدمات بسيط</h3>
+                    <div class="card-price-box">
+                        <span class="old-price">300ج</span>
+                        <span class="new-price">200ج</span>
+                    </div>
+                    <p class="card-desc">موقع شخصي لمساعدتك في حياتك اليومية — تسجيل مواعيد، متابعة مهام، تنظيم حياتك بشكل رقمي. صفحات محدودة وميزات أساسية مثالية للبداية.</p>
+                </div>
+                <a href="https://wa.me/201558247219" target="_blank" class="btn-card-order">احجز الآن</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <span class="card-badge">الأكثر طلباً 🔥</span>
+                <div>
+                    <h3 class="card-title">موقع خدمات مميز</h3>
+                    <div class="card-price-box">
+                        <span class="old-price">400ج</span>
+                        <span class="new-price">300ج</span>
+                    </div>
+                    <p class="card-desc">كل مميزات الخطة البسيطة + صفحات غير محدودة وميزات متقدمة وتصميم احترافي كامل. لا قيود على المحتوى.</p>
+                </div>
+                <a href="https://wa.me/201558247219" target="_blank" class="btn-card-order">احجز الآن</a>
+            </div>
+
+            <div class="pricing-card">
+                <div>
+                    <h3 class="card-title">موقع مشروع بسيط</h3>
+                    <div class="card-price-box">
+                        <span class="old-price">500ج</span>
+                        <span class="new-price">400ج</span>
+                    </div>
+                    <p class="card-desc">مثالي للمشاريع الصغيرة كالمطاعم والمحلات التجارية — يشمل منيو، نظام حجز، معلومات المشروع، وكل ما يطلبه العميل. بصفحات محدودة.</p>
+                </div>
+                <a href="https://wa.me/201558247219" target="_blank" class="btn-card-order">احجز الآن</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <span class="card-badge gold-badge">⭐ الأفضل قيمة</span>
+                <div>
+                    <h3 class="card-title">موقع مشروع مميز</h3>
+                    <div class="card-price-box">
+                        <span class="old-price">600ج</span>
+                        <span class="new-price">500ج</span>
+                    </div>
+                    <p class="card-desc">كل مميزات المشروع البسيط + صفحات غير محدودة، لوحة تحكم كاملة، وكل ما يطلبه العميل دون أي قيود. للمشاريع الجادة.</p>
+                </div>
+                <a href="https://wa.me/201558247219" target="_blank" class="btn-card-order">احجز الآن</a>
+            </div>
+
+            <div class="pricing-card custom-plan">
+                <span class="card-badge blue-badge">✨ مخصص لك</span>
+                <div>
+                    <h3 class="card-title">موقع مميز شامل (Custom)</h3>
+                    <div class="card-price-box">
+                        <span class="new-price" style="font-size: 1.8rem;">من 200ج إلى 600ج</span>
+                    </div>
+                    <p class="card-desc">موقع مصمم 100% حسب رغبتك ومتطلباتك — أي فكرة، أي تصميم، أي ميزة. نبني ما تحلم به بالضبط. السعر يُحدد بعد المناقشة الفنية المفتوحة وفهم أهدافك.</p>
+                </div>
+                <a href="https://wa.me/201558247219" target="_blank" class="btn-card-order">ابدأ مشروعك المخصص</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="container fade-in-section">
+            <div class="section-header">
+                <h2>ماذا قال عملاؤنا</h2>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">أ م</div>
+                        <div class="reviewer-info">
+                            <h4>أحمد محمد</h4>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"تعاملت مع Boula Web Design وكان التجربة رائعة، الموقع جاء بشكل احترافي جداً وفي وقت قياسي. سعر ممتاز مقارنة بالجودة العالية. أنصح الجميع."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">م ح</div>
+                        <div class="reviewer-info">
+                            <h4>محمود حسن</h4>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"صممت موقع لمطعمي وجاء أفضل مما توقعت! نظام الحجز والمنيو شغال بشكل مثالي. شكراً بولا!"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">س ع</div>
+                        <div class="reviewer-info">
+                            <h4>سارة علي</h4>
+                            <div class="stars">⭐⭐⭐⭐½</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"خدمة ممتازة وتواصل سريع جداً. الموقع شغال على الموبايل والكمبيوتر بشكل مثالي. راضية 100%"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">ع ي</div>
+                        <div class="reviewer-info">
+                            <h4>عمر يوسف</h4>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"أنصح كل أصحاب المشاريع يتواصلوا مع بولا. سعر معقول جداً وجودة عالية جداً. أنا شخصياً هعمل موقع تاني قريب."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">ن د</div>
+                        <div class="reviewer-info">
+                            <h4>نور الدين</h4>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"الموقع اللي صمموهولي غير حياتي المهنية بالكامل. زادت طلباتي 3 أضعاف بعد ما اشتغلت بالموقع."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-top">
+                        <div class="avatar">ف خ</div>
+                        <div class="reviewer-info">
+                            <h4>فاطمة خالد</h4>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"تعامل محترم، تسليم سريع، وتصميم فخم جداً. الأفضل في مجاله بلا منازع."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/boulana11?igsh=MWR6NzFqOTFjbTFyeQ==" target="_blank" class="social-icon instagram" aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+            <a href="https://www.tiktok.com/@tiktoklive_boula?_r=1&_t=ZS-95Z7WNzktTp" target="_blank" class="social-icon tiktok" aria-label="TikTok">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.93.17 1.86.3 2.79.4v3.74c-1.28-.11-2.54-.48-3.68-1.13-.15 3.51-.15 7.02-.02 10.53-.12 1.43-.68 2.84-1.67 3.86-1.19 1.25-2.92 1.95-4.66 1.95-2.01-.06-3.92-1.19-4.97-2.92-1.25-1.95-1.21-4.6.11-6.51 1.12-1.68 3.11-2.62 5.13-2.4v3.63c-.88-.13-1.8.16-2.44.79-.74.69-.99 1.78-.63 2.73.34.98 1.34 1.63 2.38 1.53 1.13-.02 2.06-.97 2.12-2.11.12-4.14.04-8.28.06-12.42-1.84-.01-3.67-.01-5.51-.01V0c.67.01 1.34.01 2.01.02z"/>
+                </svg>
+            </a>
+        </div>
+        <p class="copyright">© 2025 Boula Web Design — جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Intersection Observer Setup for elegant Fade-In triggers
+            const animatedSections = document.querySelectorAll('.fade-in-section');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const sectionObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: Unobserve if you only want the animation to happen once
+                        // sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
